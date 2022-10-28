@@ -1,0 +1,843 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Curl Tamagotchi</title>
+    <style type="text/css">
+      body {
+      	font-family: Trebuchet MS, sans-serif;
+      	font-size: 15px;
+      	color: #444;
+      	margin-right: 24px;
+      }
+      
+      h1	{
+      	font-size: 25px;
+      }
+      h2	{
+      	font-size: 20px;
+      }
+      h3	{
+      	font-size: 16px;
+      	font-weight: bold;
+      }
+      hr	{
+      	height: 1px;
+      	border: 0;
+      	color: #ddd;
+      	background-color: #ddd;
+      }
+      
+      .app-desc {
+        clear: both;
+        margin-left: 20px;
+      }
+      .param-name {
+        width: 100%;
+      }
+      .license-info {
+        margin-left: 20px;
+      }
+      
+      .license-url {
+        margin-left: 20px;
+      }
+      
+      .model {
+        margin: 0 0 0px 20px;
+      }
+      
+      .method {
+        margin-left: 20px;
+      }
+      
+      .method-notes	{
+      	margin: 10px 0 20px 0;
+      	font-size: 90%;
+      	color: #555;
+      }
+      
+      pre {
+        padding: 10px;
+        margin-bottom: 2px;
+      }
+      
+      .http-method {
+       text-transform: uppercase;
+      }
+      
+      pre.get {
+        background-color: #0f6ab4;
+      }
+      
+      pre.post {
+        background-color: #10a54a;
+      }
+      
+      pre.put {
+        background-color: #c5862b;
+      }
+      
+      pre.delete {
+        background-color: #a41e22;
+      }
+      
+      .huge	{
+      	color: #fff;
+      }
+      
+      pre.example {
+        background-color: #f3f3f3;
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+      
+      code {
+        white-space: pre;
+      }
+      
+      .nickname {
+        font-weight: bold;
+      }
+      
+      .method-path {
+        font-size: 1.5em;
+        background-color: #0f6ab4;
+      }
+      
+      .up {
+        float:right;
+      }
+      
+      .parameter {
+        width: 500px;
+      }
+      
+      .param {
+        width: 500px;
+        padding: 10px 0 0 20px;
+        font-weight: bold;
+      }
+      
+      .param-desc {
+        width: 700px;
+        padding: 0 0 0 20px;
+        color: #777;
+      }
+      
+      .param-type {
+        font-style: italic;
+      }
+      
+      .param-enum-header {
+      width: 700px;
+      padding: 0 0 0 60px;
+      color: #777;
+      font-weight: bold;
+      }
+      
+      .param-enum {
+      width: 700px;
+      padding: 0 0 0 80px;
+      color: #777;
+      font-style: italic;
+      }
+      
+      .field-label {
+        padding: 0;
+        margin: 0;
+        clear: both;
+      }
+      
+      .field-items	{
+      	padding: 0 0 15px 0;
+      	margin-bottom: 15px;
+      }
+      
+      .return-type {
+        clear: both;
+        padding-bottom: 10px;
+      }
+      
+      .param-header {
+        font-weight: bold;
+      }
+      
+      .method-tags {
+        text-align: right;
+      }
+      
+      .method-tag {
+        background: none repeat scroll 0% 0% #24A600;
+        border-radius: 3px;
+        padding: 2px 10px;
+        margin: 2px;
+        color: #FFF;
+        display: inline-block;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+  <h1>Curl Tamagotchi</h1>
+    <div class="app-desc">This is a API description for my Springboot based game called Curl Tamagotchi</div>
+    <div class="app-desc">More information: <a href="https://helloreverb.com">https://helloreverb.com</a></div>
+    <div class="app-desc">Contact Info: <a href="hello@helloreverb.com">hello@helloreverb.com</a></div>
+    <div class="app-desc">Version: 1.0.0</div>
+    
+    <div class="license-info">All rights reserved</div>
+    <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
+  <h2>Access</h2>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#Actions">Actions</a></h4>
+  <ul>
+  <li><a href="#drinkTamagotchiById"><code><span class="http-method">put</span> /actions/drink/{id}</code></a></li>
+  <li><a href="#feedTamagotchiById"><code><span class="http-method">put</span> /actions/eat/{id}</code></a></li>
+  <li><a href="#getAllActions"><code><span class="http-method">get</span> /actions</code></a></li>
+  <li><a href="#moveTamagotchiById"><code><span class="http-method">put</span> /actions/move/{id}/{destinationPlace}</code></a></li>
+  <li><a href="#playTamagotchiById"><code><span class="http-method">put</span> /actions/play/{id}</code></a></li>
+  <li><a href="#sleepTamagotchiById"><code><span class="http-method">put</span> /actions/sleep/{id}</code></a></li>
+  </ul>
+  <h4><a href="#Map">Map</a></h4>
+  <ul>
+  <li><a href="#getAllPlaces"><code><span class="http-method">get</span> /map</code></a></li>
+  <li><a href="#getPlaceByName"><code><span class="http-method">get</span> /map/{placeName}</code></a></li>
+  </ul>
+  <h4><a href="#Rules">Rules</a></h4>
+  <ul>
+  <li><a href="#getRules"><code><span class="http-method">get</span> /rules</code></a></li>
+  </ul>
+  <h4><a href="#Tamagotchi">Tamagotchi</a></h4>
+  <ul>
+  <li><a href="#getAllTamagotchis"><code><span class="http-method">get</span> /tamagotchis</code></a></li>
+  <li><a href="#getTamagotchiById"><code><span class="http-method">get</span> /tamagotchis/{id}</code></a></li>
+  <li><a href="#getTamagotchiByName"><code><span class="http-method">get</span> /tamagotchis/{name}</code></a></li>
+  </ul>
+
+  <h1><a name="Actions">Actions</a></h1>
+  <div class="method"><a name="drinkTamagotchiById"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /actions/drink/{id}</code></pre></div>
+    <div class="method-summary">Increase the THIRSTINESS stat to 100 to a tamagotchi with a given ID (<span class="nickname">drinkTamagotchiById</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Numeric ID of the tamagotchi to drink </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#"></a>
+    <h4 class="field-label">405</h4>
+    Given ID is invalid
+        <a href="#"></a>
+    <h4 class="field-label">410</h4>
+    You are not in the KITCHEN
+        <a href="#"></a>
+    <h4 class="field-label">414</h4>
+    There is no WATER left
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="feedTamagotchiById"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /actions/eat/{id}</code></pre></div>
+    <div class="method-summary">Increase the HUNGRINESS stat to 100 to a tamagotchi with a given ID (<span class="nickname">feedTamagotchiById</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Numeric ID of the tamagotchi to feed </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#"></a>
+    <h4 class="field-label">405</h4>
+    Given ID is invalid
+        <a href="#"></a>
+    <h4 class="field-label">410</h4>
+    You are not in the KITCHEN
+        <a href="#"></a>
+    <h4 class="field-label">412</h4>
+    There is no FOOD left
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getAllActions"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /actions</code></pre></div>
+    <div class="method-summary">Return all the possible actions in the game (<span class="nickname">getAllActions</span>)</div>
+    <div class="method-notes">Return all the possible actions in the game with description</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Action">Action</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "name" : "Move",
+  "description" : "Move to another place, decrease ENERGY by 15"
+}, {
+  "name" : "Eat",
+  "description" : "Increase the HUNGRINESS to 100, only possible if being in the KITCHEN and there are FOOD to consume"
+}, {
+  "name" : "Drink",
+  "description" : "Increase the THIRSTINESS to 100, only possible if being in the KITCHEN and there are WATER to consume"
+}, {
+  "name" : "Play",
+  "description" : "Increase the HAPPINESS to 100, only possible if being in the PLAYGROUND and there are at least 2 tamagotchis"
+}, {
+  "name" : "Sleep",
+  "description" : "Increase the ENERGY to 100, decrease the THIRSTINESS by 30 and the HUNGRINESS by 20, if the values would go lower than 0, you die :("
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="moveTamagotchiById"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /actions/move/{id}/{destinationPlace}</code></pre></div>
+    <div class="method-summary">Move a tamagotchi with the given ID to the given PLACE (<span class="nickname">moveTamagotchiById</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Numeric ID of the tamagotchi to get </div>      <div class="param">destinationPlace (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of the destination place </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#"></a>
+    <h4 class="field-label">405</h4>
+    Given ID is invalid
+        <a href="#"></a>
+    <h4 class="field-label">406</h4>
+    Given destinationPlace is invalid
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="playTamagotchiById"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /actions/play/{id}</code></pre></div>
+    <div class="method-summary">Increase the HAPPINESS stat to 100 to a tamagotchi with a given ID (<span class="nickname">playTamagotchiById</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Numeric ID of the tamagotchi to play with </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#"></a>
+    <h4 class="field-label">405</h4>
+    Given ID is invalid
+        <a href="#"></a>
+    <h4 class="field-label">420</h4>
+    You are not in the PLAYGROUND
+        <a href="#"></a>
+    <h4 class="field-label">422</h4>
+    There is nobody in the PLAYGROUND other than you
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="sleepTamagotchiById"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /actions/sleep/{id}</code></pre></div>
+    <div class="method-summary">Increase the ENERGY stat to 100 to a tamagotchi with a given ID, decrease the THIRSTINESS by 30 and the HUNGRINESS by 20 (<span class="nickname">sleepTamagotchiById</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Numeric ID of the tamagotchi to sleep </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#"></a>
+    <h4 class="field-label">405</h4>
+    Given ID is invalid
+        <a href="#"></a>
+    <h4 class="field-label">430</h4>
+    You are not in the BEDROOM
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Map">Map</a></h1>
+  <div class="method"><a name="getAllPlaces"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /map</code></pre></div>
+    <div class="method-summary">Return all places on the map (<span class="nickname">getAllPlaces</span>)</div>
+    <div class="method-notes">Return all places on the map with description about the actions you can execute there</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Place">Place</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "name" : "Bedroom",
+  "description" : "You can execute the SLEEP command here",
+  "tamagotchis" : [ {
+    "id" : 1,
+    "name" : "Ed",
+    "age" : 10,
+    "color" : "blue",
+    "hungriness" : 65,
+    "thirstiness" : 45,
+    "happiness" : 25,
+    "energy" : 85
+  } ]
+}, {
+  "name" : "Kitchen",
+  "description" : "You can execute the EAT and the DRINK command here, if there is any food and water.",
+  "tamagotchis" : [ {
+    "id" : 2,
+    "name" : "Eddy",
+    "age" : 8,
+    "color" : "green",
+    "hungriness" : 25,
+    "thirstiness" : 75,
+    "happiness" : 80,
+    "energy" : 30
+  }, {
+    "id" : 3,
+    "name" : "Edd",
+    "age" : 14,
+    "color" : "pink",
+    "hungriness" : 20,
+    "thirstiness" : 70,
+    "happiness" : 45,
+    "energy" : 50
+  } ]
+}, {
+  "name" : "Playground",
+  "description" : "You can execute the PLAY command here,if there are at least 2 tamagotchis in this place."
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getPlaceByName"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /map/{placeName}</code></pre></div>
+    <div class="method-summary">Return the place with the given name (<span class="nickname">getPlaceByName</span>)</div>
+    <div class="method-notes">Return a place's name, description and tamagotchis   that are currently in it with the given name</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">placeName (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of the place to get </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Place">Place</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "name" : "Bedroom",
+  "description" : "You can execute the SLEEP command here",
+  "tamagotchis" : [ {
+    "id" : 1,
+    "name" : "Ed",
+    "age" : 10,
+    "color" : "blue",
+    "hungriness" : 65,
+    "thirstiness" : 45,
+    "happiness" : 25,
+    "energy" : 85
+  } ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Rules">Rules</a></h1>
+  <div class="method"><a name="getRules"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /rules</code></pre></div>
+    <div class="method-summary">Return the game rules (<span class="nickname">getRules</span>)</div>
+    <div class="method-notes">Return the game rules and the losing conditions (there is no such as winning condition, it's a tamagotchi game)</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>"Welcome to the Curl Tamagotchi game, where you only lose. The point of the game is to keeping alive as much tamagotchis as you can. Each hour every tamagotchis stats(HUNGRINESS, THIRSTINESS, HAPPINESS, ENERGY) are decreasing by a random amount (10-30). To keep the tamagotchis alive you have to certain actions (MOVE, EAT,DRINK, PLAY, SLEEP). These actions increase the tamagotchis stats by a given number. If any of the stats goes below 0, your tamagotchi dies :(. More detailed descripions are under root endpoints."</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>text/plain</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successfull operation
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Tamagotchi">Tamagotchi</a></h1>
+  <div class="method"><a name="getAllTamagotchis"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /tamagotchis</code></pre></div>
+    <div class="method-summary">Return all tamagotchis (<span class="nickname">getAllTamagotchis</span>)</div>
+    <div class="method-notes">Lists all the tamagotchis that are currently in the game</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Tamagotchi">Tamagotchi</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "id" : 1,
+  "name" : "Ed",
+  "age" : 10,
+  "color" : "blue",
+  "hungriness" : 65,
+  "thirstiness" : 45,
+  "happiness" : 25,
+  "energy" : "85,"
+}, {
+  "id" : 2,
+  "name" : "Eddy",
+  "age" : 8,
+  "color" : "green",
+  "hungriness" : 25,
+  "thirstiness" : 75,
+  "happiness" : 80,
+  "energy" : 30
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getTamagotchiById"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /tamagotchis/{id}</code></pre></div>
+    <div class="method-summary">Return tamagotchi with given ID (<span class="nickname">getTamagotchiById</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Numeric ID of the tamagotchi to get </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Tamagotchi">Tamagotchi</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "id" : 1,
+  "name" : "Ed",
+  "age" : 10,
+  "color" : "blue",
+  "hungriness" : 65,
+  "thirstiness" : 45,
+  "happiness" : 25,
+  "energy" : "85,"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        
+    <h4 class="field-label">405</h4>
+    The given ID is invalid
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getTamagotchiByName"></a>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /tamagotchis/{name}</code></pre></div>
+    <div class="method-summary">Return tamagotchi with given name (<span class="nickname">getTamagotchiByName</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">name (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of the tamagotchi to get </div>    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Tamagotchi">Tamagotchi</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "id" : 1,
+  "name" : "Ed",
+  "age" : 10,
+  "color" : "blue",
+  "hungriness" : 65,
+  "thirstiness" : 45,
+  "happiness" : 25,
+  "energy" : "85,"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        
+    <h4 class="field-label">405</h4>
+    The given name is invalid
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#Action"><code>Action</code></a></li>
+    <li><a href="#Place"><code>Place</code></a></li>
+    <li><a href="#Tamagotchi"><code>Tamagotchi</code></a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="Action"><code>Action</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#object">Object</a></span>  </div>
+<div class="param">description (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Place"><code>Place</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">description (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">tamagotchis (optional)</div><div class="param-desc"><span class="param-type"><a href="#Tamagotchi">array[Tamagotchi]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Tamagotchi"><code>Tamagotchi</code></a> <a class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">age (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">color (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">hungriness (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">thirstiness (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">happiness (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+<div class="param">energy (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>
